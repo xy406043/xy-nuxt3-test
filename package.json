@@ -3,14 +3,12 @@
   "scripts": {
     "dev": "nuxi dev",
     "devBuild": "nuxi build",
-    "devStart": "node .output/server/index.mjs",
-    "preview": "nuxi preview"
+    "devStart": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "@nuxt/kit": "^0.8.1-edge",
     "@unocss/nuxt": "^0.26.2",
     "less": "^4.1.2",
-    "nuxt3": "latest",
+    "nuxt3": "^3.0.0-27296423.f3082ca",
     "unplugin-vue-components": "^0.17.21"
   },
   "dependencies": {

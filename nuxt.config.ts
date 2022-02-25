@@ -79,6 +79,9 @@ export default defineNuxtConfig({
     ssr: {
       noExternal: ["moment", "compute-scroll-into-view", "ant-design-vue"],
     },
+     resolve: {
+        mainFields: ['module', 'jsnext:main', 'jsnext']
+    }
     // rollupOptions: {
     //   output: {
     //     manualChunks(id) {
