@@ -1,23 +1,35 @@
-FROM ubuntu:16.04
+# FROM ubuntu:18.04
 
-USER root
+# USER root
+# ENV DEBIAN_FRONTEND noninteractive
+# RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.aliyun\.com\/ubuntu\//g' /etc/apt/sources.list
 
-RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.aliyun\.com\/ubuntu\//g' /etc/apt/sources.list
+# # COPY ./sources.list /etc/apt/sources.list
+# RUN apt-get update && apt-get install -yqq nginx && apt-get install -y curl wget && apt-get install -y git
 
-# COPY ./sources.list /etc/apt/sources.list
-RUN apt-get update && apt-get install -yqq nginx && apt-get install -y curl wget
+# RUN wget -qO- https://deb.nodesource.com/setup_16.x | bash -
+# RUN apt-get update && apt-get install -y nodejs
+# RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
+# # 复制项目代码
+# COPY . /src
+# WORKDIR /src
 
-RUN wget -qO- https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get update && apt-get install -y nodejs
-RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
-# 复制项目代码
+# RUN cnpm i
+
+# RUN npm run devBuild
+
+# EXPOSE 3000
+
+# CMD [ "npm", "run", "devStart" ]
+
+
+FROM nginx:1.14.2-alpine
+
 COPY . /src
 WORKDIR /src
 
-RUN cnpm i
+COPY nginx.conf /etc/nginx/nginx.conf
 
-RUN npm run devBuild
+EXPOSE 80
 
-EXPOSE 3000
-
-CMD [ "npm", "run", "devStart" ]
+CMD ["nginx", "-g", "daemon off;"]
