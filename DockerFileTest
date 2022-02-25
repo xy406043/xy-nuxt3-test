@@ -1,11 +1,12 @@
-# FROM ubuntu:18.04
+FROM ubuntu:18.04
 
-# USER root
-# ENV DEBIAN_FRONTEND noninteractive
-# RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.aliyun\.com\/ubuntu\//g' /etc/apt/sources.list
+USER root
+ENV DEBIAN_FRONTEND noninteractive
+#COPY ./sources.list /etc/apt/sources.list
+RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.163\.com\/ubuntu\//g' /etc/apt/sources.list
 
-# # COPY ./sources.list /etc/apt/sources.list
-# RUN apt-get update && apt-get install -yqq nginx && apt-get install -y curl wget && apt-get install -y git
+RUN apt-get update && apt-get install -yqq nginx && apt-get install -y curl wget && apt-get install -y git
+
 
 # RUN wget -qO- https://deb.nodesource.com/setup_16.x | bash -
 # RUN apt-get update && apt-get install -y nodejs
@@ -23,13 +24,13 @@
 # CMD [ "npm", "run", "devStart" ]
 
 
-FROM nginx:1.14.2-alpine
+# FROM nginx:1.14.2-alpine
 
 COPY . /src
 WORKDIR /src
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 80
+EXPOSE 3000
 
 CMD ["nginx", "-g", "daemon off;"]
